@@ -12,7 +12,7 @@ import { default as Fire } from "./models/Fire.tsx";
 import { default as Outdoors } from "./models/Outdoors.tsx"
 import { default as Room } from "./models/Room.tsx";
 import { default as Interactables } from "./models/Interactables.tsx";
-import { default as Snow } from "./models/Snow.tsx";
+import { default as Snow } from "./Snow.tsx";
 import { default as Furniture } from "./models/Furniture.tsx";
 import { default as Photos } from "./models/Photos.tsx";
 
