@@ -5,6 +5,7 @@
 [x] fix lighting to be darker 
 [x] re-finalize the model. separate the interactables, the photos frames, and fix the guitar model. 
 [x] add fire
+[ ] add flickering to fireplace lights
 
 [ ]need to add img loading to the following materials -> 
    ``` 
