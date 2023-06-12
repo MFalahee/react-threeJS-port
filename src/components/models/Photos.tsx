@@ -9,10 +9,10 @@ import { GLTF } from "three-stdlib";
 
 type GLTFResult = GLTF & {
   nodes: {
-    Cube009: THREE.Mesh;
-    Cube009_1: THREE.Mesh;
     Cube010: THREE.Mesh;
     Cube010_1: THREE.Mesh;
+    Cube009: THREE.Mesh;
+    Cube009_1: THREE.Mesh;
     Cube011: THREE.Mesh;
     Cube011_1: THREE.Mesh;
     Cube014: THREE.Mesh;
@@ -27,10 +27,10 @@ type GLTFResult = GLTF & {
     Cube_1: THREE.Mesh;
   };
   materials: {
-    bookbinding7: THREE.MeshStandardMaterial;
-    photoImg1: THREE.MeshStandardMaterial;
     bookbinding1: THREE.MeshStandardMaterial;
     photoImg2: THREE.MeshStandardMaterial;
+    bookbinding7: THREE.MeshStandardMaterial;
+    photoImg1: THREE.MeshStandardMaterial;
     ["text.001"]: THREE.MeshStandardMaterial;
     photoImg3: THREE.MeshStandardMaterial;
     ["metal.003"]: THREE.MeshStandardMaterial;
@@ -45,74 +45,103 @@ type GLTFResult = GLTF & {
   };
 };
 
-let path = "/models/photos.gltf";
-if (import.meta.env.PROD) {
-  path = "";
-  // update to AWS s3 bucket
-}
-
-export default function Model(props: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTF(path) as GLTFResult;
+export function Model(props: JSX.IntrinsicElements["group"]) {
+  const { nodes, materials } = useGLTF("/photos.gltf") as GLTFResult;
   return (
     <group {...props} dispose={null}>
       <mesh
-        geometry={nodes.Cube009.geometry}
-        material={materials.bookbinding7}
-      />
-      <mesh
-        geometry={nodes.Cube009_1.geometry}
-        material={materials.photoImg1}
-      />
-      <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Cube010.geometry}
         material={materials.bookbinding1}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Cube010_1.geometry}
         material={materials.photoImg2}
       />
       <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Cube009.geometry}
+        material={materials.bookbinding7}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Cube009_1.geometry}
+        material={materials.photoImg1}
+      />
+      <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Cube011.geometry}
         material={materials["text.001"]}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Cube011_1.geometry}
         material={materials.photoImg3}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Cube014.geometry}
         material={materials["metal.003"]}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Cube014_1.geometry}
         material={materials.photoImg4}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Cube015.geometry}
         material={materials.bookbinding2}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Cube015_1.geometry}
         material={materials.photoImg5}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Cube016.geometry}
         material={materials.bookbinding3}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Cube016_1.geometry}
         material={materials.photoImg6}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Cube017.geometry}
         material={materials["Material.006"]}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Cube017_1.geometry}
         material={materials.photoImg7}
       />
-      <mesh geometry={nodes.Cube.geometry} material={materials.photoImg0} />
       <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Cube.geometry}
+        material={materials.photoImg0}
+      />
+      <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Cube_1.geometry}
         material={materials.bookbinding1}
       />
@@ -120,4 +149,4 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload(path);
+useGLTF.preload("/photos.gltf");

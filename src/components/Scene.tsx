@@ -7,14 +7,23 @@ import { Environment, PerspectiveCamera, Stars } from "@react-three/drei";
 import Camera from "./Camera";
 import Lights from "./Lights";
 
-
-import { default as Fire } from "./models/Fire.tsx";
-import { default as Outdoors } from "./models/Outdoors.tsx"
-import { default as Room } from "./models/Room.tsx";
-import { default as Interactables } from "./models/Interactables.tsx";
-import { default as Snow } from "./Snow.tsx";
-import { default as Furniture } from "./models/Furniture.tsx";
-import { default as Photos } from "./models/Photos.tsx";
+import { Model as Art } from "./models/Art";
+import { Model as Books } from "./models/Books";
+import { Model as Bookshelf } from "./models/Bookshelf";
+import { Model as BookshelfItems } from "./models/BookshelfItems";
+import { Model as Couch } from "./models/Couch";
+import { Model as Lamp } from "./models/Lamp";
+import { Model as Laptop } from "./models/Laptop";
+import { Model as LogsTools } from "./models/LogsTools";
+import { Model as Music } from "./models/Music";
+import { Model as Outside } from "./models/Outside";
+import { Model as Photos } from "./models/Photos";
+import { Model as Projector } from "./models/Projector";
+import { Model as Room } from "./models/Room";
+import { Model as RugTable } from "./models/RugTable";
+import { Model as Skis } from "./models/Skis";
+import { default as Snow } from "./models/Snow";
+import { default as Fire } from "./models/Fire";
 
 const Scene: React.FC = () => {
   const cameraPosition = new THREE.Vector3(10, 30, -50);
@@ -44,12 +53,35 @@ const Scene: React.FC = () => {
   return (
     <Canvas shadows="basic">
       <Suspense>
+        {/* passive models */}
         <Room />
+        <Outside position={[40, 10, 10]} />
+        <Art />
+        <Books />
+        <Bookshelf />
+        <Couch />
+        <LogsTools />
+        <Music />
+        <RugTable />
+        <Skis />
+        {/* interactable models*/}
+        <Laptop />
+        <BookshelfItems />
+        <Projector />
+        <Lamp />
         <Photos />
-        <Furniture />
+        {/* effects */}
+        <Stars
+          radius={100}
+          count={2500}
+          factor={6}
+          saturation={0}
+          fade={true}
+        />
         <Snow />
         <Fire />
-        <Interactables />
+
+        {/* camera */}
         <PerspectiveCamera
           makeDefault
           near={1}
@@ -58,14 +90,6 @@ const Scene: React.FC = () => {
           position={cameraPosition}
         />
         <Camera freeCamera={true} />
-        <Outdoors position={[40,10,10]}/>
-        <Stars
-          radius={100}
-          count={2500}
-          factor={6}
-          saturation={0}
-          fade={true}
-        />
         <Lights />
         {/* <Environment background={false} preset={"night"}/> */}
       </Suspense>

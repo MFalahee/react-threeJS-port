@@ -5,7 +5,7 @@
 [x] fix lighting to be darker 
 [x] re-finalize the model. separate the interactables, the photos frames, and fix the guitar model. 
 [x] add fire
-[ ] add flickering to fireplace lights
+[x] add flickering to fireplace lights
 
 [ ]need to add img loading to the following materials -> 
    ``` 
@@ -18,7 +18,7 @@
     photoImg6: THREE.MeshStandardMaterial;
     photoImg7: THREE.MeshStandardMaterial;
 ```
-    aws bucket for storing photos from the get go will make my overall life easier
-
+[x]  aws bucket for storing photos from the get go will make my overall life easier
+[ ] position 
 [ ] hover behavior for interactable objects needs to be implemented.
 

@@ -15,7 +15,7 @@ const Lights: React.FC = () => {
     Math.random() * 0.2
   );
 
-  useFrame((state, delta) => {
+  useFrame(() => {
     // Update light intensity for flickering effect
     if (fireLightRef1.current && fireLightRef2.current) {
       // Gradually move towards the target intensity
@@ -26,7 +26,7 @@ const Lights: React.FC = () => {
 
       // Occasionally update the target intensity
       if (Math.random() < 0.01) {
-        // 5% chance per frame
+        // 1% chance per frame
         setTargetIntensity1(Math.random() * 2);
         setTargetIntensity2(Math.random() * 2);
       }

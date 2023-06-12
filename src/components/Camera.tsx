@@ -19,15 +19,6 @@ export default function Camera(props: cameraProps) {
           minAzimuthAngle={Math.PI / 1.5}
           maxAzimuthAngle={Math.PI + Math.PI / 2}
         />
-      // <>
-      //   <OrbitControls
-      //     target={[0, 0, 0]}
-      //     maxDistance={100}
-      //     enableZoom={true}
-      //     enablePan={true}
-      //     zoomSpeed={1}
-      //   />
-      // </>
     );
   }
   else

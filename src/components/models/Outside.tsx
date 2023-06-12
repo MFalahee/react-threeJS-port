@@ -30,8 +30,8 @@ type GLTFResult = GLTF & {
   };
 };
 
-export default function Model(props: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTF("/models/outsidefinalized.gltf") as GLTFResult;
+export function Model(props: JSX.IntrinsicElements["group"]) {
+  const { nodes, materials } = useGLTF("/outsidefinalized.gltf") as GLTFResult;
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -86,4 +86,4 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/outsidefinalized.gltf");
+useGLTF.preload("/outsidefinalized.gltf");
