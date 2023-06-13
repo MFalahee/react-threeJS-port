@@ -59,6 +59,7 @@ const Scene: React.FC = () => {
         <Art />
         <Books />
         <Bookshelf />
+        <Bookshelf position={[0, 0, -8.5]} />
         <Couch />
         <LogsTools />
         <Music />
@@ -66,7 +67,7 @@ const Scene: React.FC = () => {
         <Skis />
         {/* interactable models*/}
         <Laptop />
-        <BookshelfItems />
+        <BookshelfItems position={[0, 0, -0.3]} />
         <Projector />
         <Lamp />
         <Photos />
