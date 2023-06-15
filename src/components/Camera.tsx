@@ -1,8 +1,14 @@
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import React, { useRef } from "react";
 
-export default function Camera() {
-  const cameraStartPosition: [number, number, number] = [10, 30, -50];
+interface CameraProps {
+  makeDefault?: boolean;
+  bookshelf?: boolean;
+  laptop?: boolean;
+}
+
+export default function Camera(props: CameraProps) {
+  const cameraStartPosition: [number, number, number] = [10, 25, -30];
   const ref = useRef<THREE.PerspectiveCamera>(null!);
   return (
     <>
@@ -10,7 +16,8 @@ export default function Camera() {
         makeDefault
         near={1}
         far={500}
-        fov={75}
+        fov={50}
+        ref={ref}
         position={ref.current ? ref.current.position : cameraStartPosition}
       />
       ;
@@ -22,7 +29,7 @@ export default function Camera() {
         zoomSpeed={1}
         minPolarAngle={Math.PI / 3}
         maxPolarAngle={Math.PI / 1.5}
-        minAzimuthAngle={Math.PI / 1.5}
+        minAzimuthAngle={Math.PI / 1.3}
         maxAzimuthAngle={Math.PI + Math.PI / 2}
       />
     </>

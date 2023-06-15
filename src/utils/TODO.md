@@ -7,21 +7,12 @@
 [x] re-finalize the model. separate the interactables, the photos frames, and fix the guitar model.
 [x] add fire
 [x] add flickering to fireplace lights
-
-[ ]need to add img TEXTURE to the following materials ->
-
-```
- photoImg0: THREE.MeshStandardMaterial;
- photoImg1: THREE.MeshStandardMaterial;
- photoImg2: THREE.MeshStandardMaterial;
- photoImg3: THREE.MeshStandardMaterial;
- photoImg4: THREE.MeshStandardMaterial;
- photoImg5: THREE.MeshStandardMaterial;
- photoImg6: THREE.MeshStandardMaterial;
- photoImg7: THREE.MeshStandardMaterial;
-```
-
 [x] aws bucket for storing photos from the get go will make my overall life easier
 [x] update models to load locally or via cdn
 [x] position
-[ ] hover behavior for interactable objects needs to be implemented.
+
+[] hover behavior for interactable objects needs to be implemented:
+- [x] laptop
+- [ ] bookshelf
+[] need to add imgs to the photo frames
+[] Update camera to move to interactables

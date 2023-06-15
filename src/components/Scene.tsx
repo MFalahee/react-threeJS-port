@@ -8,7 +8,7 @@ import {
   Outline,
   EffectComposer,
   Selection,
-  Select,
+  Bloom,
 } from "@react-three/postprocessing";
 import { BlendFunction, KernelSize } from "postprocessing";
 import Camera from "./Camera";
@@ -69,6 +69,7 @@ const Scene: React.FC = () => {
         <Lights />
         <Selection>
           <EffectComposer multisampling={8} disableNormalPass autoClear={false}>
+            <Bloom luminanceThreshold={0.5} luminanceSmoothing={0.5} />
             {interactBlink ? (
               <Outline
                 blendFunction={BlendFunction.SCREEN}

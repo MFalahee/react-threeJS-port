@@ -4,7 +4,7 @@ import { useFrame } from "@react-three/fiber";
 import { InstancedMesh, Vector3 } from "three";
 
 const NUM_PARTICLES = 1000;
-const BOUNDARY_X = 100;
+const BOUNDARY_X = 70;
 const BOUNDARY_Y = 100;
 const BOUNDARY_Z = 100;
 
@@ -21,7 +21,7 @@ export default function Snow() {
       );
 
       const velocity = new Vector3(
-        (Math.random() - 0.5) / 50, // Simulate wind
+        -Math.random() / 10, // Simulate wind
         -Math.random() / 10, // Gravity
         (Math.random() - 0.5) / 50 // Simulate wind
       );
@@ -33,7 +33,6 @@ export default function Snow() {
 
   useFrame(() => {
     if (meshRef.current) {
-      const time = performance.now();
       particles.forEach((particle, i) => {
         particle.position.add(particle.velocity);
 
@@ -70,7 +69,7 @@ export default function Snow() {
           NUM_PARTICLES,
         ]}
       >
-        <circleGeometry args={[0.1, 16]} />
+        <circleGeometry args={[0.07, 16]} />
         <meshBasicMaterial color="white" />
       </instancedMesh>
     </>
