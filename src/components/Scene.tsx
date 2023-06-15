@@ -2,8 +2,7 @@ import React, { useRef, Suspense } from "react";
 import * as THREE from "three";
 
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
-import { useControls } from "leva";
-import { PerspectiveCamera, Stars } from "@react-three/drei";
+import { Stars, useCursor } from "@react-three/drei";
 import {
   Outline,
   EffectComposer,
@@ -34,6 +33,7 @@ import { default as Fire } from "./models/Fire";
 
 const Scene: React.FC = () => {
   const [interactBlink, setInteractBlink] = React.useState(true);
+  useCursor(!interactBlink, "pointer", "auto");
   return (
     <Canvas>
       <Suspense>
@@ -42,18 +42,19 @@ const Scene: React.FC = () => {
         <Outside position={[40, 10, 10]} />
         <Art />
         <Books />
-        <Bookshelf />
-        <Bookshelf position={[0, 0, -8.5]} />
         <Couch />
         <LogsTools />
         <Music />
         <RugTable />
         <Skis />
         {/* interactable models*/}
+        <Bookshelf />
+        <Bookshelf position={[0, 0, -8.5]} />
         <BookshelfItems position={[0, 0, -0.3]} />
+
         <Projector />
         <Lamp />
-        <Photos />
+
         <Stars
           radius={100}
           count={2500}
@@ -100,6 +101,7 @@ const Scene: React.FC = () => {
               setInteractBlink(true);
             }}
           />
+          <Photos />
         </Selection>
       </Suspense>
     </Canvas>

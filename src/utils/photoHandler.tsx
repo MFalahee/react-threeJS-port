@@ -1,12 +1,27 @@
 // create a function that returns the path to the model, given the model name
-export function photoHandler(local: boolean) {
-  let path = "/imgs/";
-  if (!local) path = import.meta.env.IMG_PATH;
-  // get list of files in path - if production we only needs imgs folder from returned array
-  // if local we just need to return all the images in /imgs/
-  // return array of files
-  try {
-  } catch (e) {
-    console.log(e);
-  }
+export function photoHandler() {
+  const imgNames = [
+    "backyard.webp",
+    "brosndad.webp",
+    "catan.webp",
+    "fam1.webp",
+    "fam2.webp",
+    "finn1.webp",
+    "finn2.webp",
+    "goof.webp",
+    "mama.webp",
+    "millie.webp",
+    "redwood.webp",
+    "smile.webp",
+    "veccswalkingcute.webp",
+    "wedding.webp",
+    "young.webp",
+  ];
+  const imageSources: string[] = [];
+  // iterate through the photo names and add them to the path
+  // get the photos
+  imgNames.forEach((name) => {
+    imageSources.push(import.meta.env.VITE_CF_PATH + "imgs/" + name);
+  });
+  return imageSources;
 }
