@@ -3,7 +3,14 @@ import * as THREE from "three";
 
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { useControls } from "leva";
-import { Environment, PerspectiveCamera, Stars } from "@react-three/drei";
+import { PerspectiveCamera, Stars } from "@react-three/drei";
+import {
+  Outline,
+  EffectComposer,
+  Selection,
+  Select,
+} from "@react-three/postprocessing";
+import { BlendFunction, KernelSize } from "postprocessing";
 import Camera from "./Camera";
 import Lights from "./Lights";
 
@@ -26,32 +33,9 @@ import { default as Snow } from "./models/Snow";
 import { default as Fire } from "./models/Fire";
 
 const Scene: React.FC = () => {
-  const cameraPosition = new THREE.Vector3(10, 30, -50);
-  const [config, setConfig] = useControls(() => ({
-    camera: {
-      value: true,
-      hint: "free camera",
-      options: [true, false],
-    },
-    outside: {
-      value: true,
-      hint: "Outside is visible",
-      options: [true, false],
-    },
-    room: {
-      value: true,
-      hint: "Room is visible",
-      options: [true, false],
-    },
-    interactables: {
-      value: true,
-      hint: "Interactables are visible",
-      options: [true, false],
-    },
-  }));
-
+  const [interactBlink, setInteractBlink] = React.useState(true);
   return (
-    <Canvas shadows="basic">
+    <Canvas>
       <Suspense>
         {/* passive models */}
         <Room />
@@ -66,12 +50,10 @@ const Scene: React.FC = () => {
         <RugTable />
         <Skis />
         {/* interactable models*/}
-        <Laptop />
         <BookshelfItems position={[0, 0, -0.3]} />
         <Projector />
         <Lamp />
         <Photos />
-        {/* effects */}
         <Stars
           radius={100}
           count={2500}
@@ -81,18 +63,43 @@ const Scene: React.FC = () => {
         />
         <Snow />
         <Fire />
-
         {/* camera */}
-        <PerspectiveCamera
-          makeDefault
-          near={1}
-          far={500}
-          fov={75}
-          position={cameraPosition}
-        />
-        <Camera freeCamera={true} />
+
+        <Camera />
         <Lights />
-        {/* <Environment background={false} preset={"night"}/> */}
+        <Selection>
+          <EffectComposer multisampling={8} disableNormalPass autoClear={false}>
+            {interactBlink ? (
+              <Outline
+                blendFunction={BlendFunction.SCREEN}
+                edgeStrength={2.5}
+                pulseSpeed={0.3}
+                visibleEdgeColor={0xffffff}
+                hiddenEdgeColor={0x000000}
+                blur
+                kernelSize={KernelSize.SMALL}
+              />
+            ) : (
+              <Outline
+                blendFunction={BlendFunction.SCREEN}
+                edgeStrength={2}
+                pulseSpeed={0.5}
+                blur
+                kernelSize={KernelSize.VERY_LARGE}
+                visibleEdgeColor={0xa900ff}
+                hiddenEdgeColor={0xa900ff}
+              />
+            )}
+          </EffectComposer>
+          <Laptop
+            onPointerOver={() => {
+              setInteractBlink(false);
+            }}
+            onPointerLeave={() => {
+              setInteractBlink(true);
+            }}
+          />
+        </Selection>
       </Suspense>
     </Canvas>
   );

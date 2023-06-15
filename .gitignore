@@ -28,3 +28,6 @@ public/*.gltf
 *.glb
 public/big/
 public/models/
+.env
+
+src/utils/*.md

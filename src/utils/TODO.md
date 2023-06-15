@@ -8,7 +8,7 @@
 [x] add fire
 [x] add flickering to fireplace lights
 
-[ ]need to add img loading to the following materials ->
+[ ]need to add img TEXTURE to the following materials ->
 
 ```
  photoImg0: THREE.MeshStandardMaterial;
@@ -23,5 +23,5 @@
 
 [x] aws bucket for storing photos from the get go will make my overall life easier
 [x] update models to load locally or via cdn
-[ ] position
+[x] position
 [ ] hover behavior for interactable objects needs to be implemented.
