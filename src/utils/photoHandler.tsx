@@ -21,7 +21,9 @@ export function photoHandler() {
   // iterate through the photo names and add them to the path
   // get the photos
   imgNames.forEach((name) => {
-    imageSources.push(import.meta.env.VITE_CF_PATH + "imgs/" + name);
+    import.meta.env.PROD
+      ? imageSources.push(import.meta.env.VITE_CF_PATH + "imgs/" + name)
+      : imageSources.push("/imgs/" + name);
   });
   return imageSources;
 }

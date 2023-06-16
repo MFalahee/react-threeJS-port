@@ -34,6 +34,13 @@ import { default as Fire } from "./models/Fire";
 const Scene: React.FC = () => {
   const [interactBlink, setInteractBlink] = React.useState(true);
   useCursor(!interactBlink, "pointer", "auto");
+  function handleLaptopClick() {
+    console.log("clicked laptop");
+  }
+
+  function handlePhotoClick() {
+    console.log("Clicked photo");
+  }
   return (
     <Canvas>
       <Suspense>
@@ -70,12 +77,11 @@ const Scene: React.FC = () => {
         <Lights />
         <Selection>
           <EffectComposer multisampling={8} disableNormalPass autoClear={false}>
-            <Bloom luminanceThreshold={0.5} luminanceSmoothing={0.5} />
             {interactBlink ? (
               <Outline
                 blendFunction={BlendFunction.SCREEN}
                 edgeStrength={2.5}
-                pulseSpeed={0.3}
+                pulseSpeed={0.5}
                 visibleEdgeColor={0xffffff}
                 hiddenEdgeColor={0x000000}
                 blur
@@ -94,6 +100,9 @@ const Scene: React.FC = () => {
             )}
           </EffectComposer>
           <Laptop
+            onClick={() => {
+              handleLaptopClick();
+            }}
             onPointerOver={() => {
               setInteractBlink(false);
             }}
@@ -101,7 +110,17 @@ const Scene: React.FC = () => {
               setInteractBlink(true);
             }}
           />
-          <Photos />
+          <Photos
+            onClick={() => {
+              handlePhotoClick();
+            }}
+            onPointerOver={() => {
+              setInteractBlink(false);
+            }}
+            onPointerLeave={() => {
+              setInteractBlink(true);
+            }}
+          />
         </Selection>
       </Suspense>
     </Canvas>

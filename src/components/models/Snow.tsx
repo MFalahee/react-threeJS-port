@@ -70,7 +70,7 @@ export default function Snow() {
         ]}
       >
         <circleGeometry args={[0.07, 16]} />
-        <meshBasicMaterial color="white" />
+        <meshBasicMaterial color={0x606f99} />
       </instancedMesh>
     </>
   );

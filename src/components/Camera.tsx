@@ -6,7 +6,6 @@ interface CameraProps {
   bookshelf?: boolean;
   laptop?: boolean;
 }
-
 export default function Camera(props: CameraProps) {
   const cameraStartPosition: [number, number, number] = [10, 25, -30];
   const ref = useRef<THREE.PerspectiveCamera>(null!);
@@ -20,7 +19,6 @@ export default function Camera(props: CameraProps) {
         ref={ref}
         position={ref.current ? ref.current.position : cameraStartPosition}
       />
-      ;
       <OrbitControls
         target={[15, 10, 15]}
         enableZoom={true}
