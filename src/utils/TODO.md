@@ -24,3 +24,4 @@
     2. [ ] onClick returns the camera to original
 - [ ] photos
     1. [ ] onClick camera to view photos more clearly
+[ ] embed web page
