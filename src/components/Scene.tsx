@@ -30,6 +30,7 @@ import { Model as RugTable } from "./models/RugTable";
 import { Model as Skis } from "./models/Skis";
 import { default as Snow } from "./models/Snow";
 import { default as Fire } from "./models/Fire";
+import { default as ProjectPage } from "./projectView/ProjectPage";
 
 const Scene: React.FC = () => {
   const [interactBlink, setInteractBlink] = React.useState(true);
@@ -75,6 +76,7 @@ const Scene: React.FC = () => {
 
         <Camera />
         <Lights />
+        {/* selection for outline effect */}
         <Selection>
           <EffectComposer multisampling={8} disableNormalPass autoClear={false}>
             {interactBlink ? (
@@ -122,6 +124,8 @@ const Scene: React.FC = () => {
             }}
           />
         </Selection>
+        {/* embedded HTML page on laptop */}
+        <ProjectPage visible={true} />
       </Suspense>
     </Canvas>
   );

@@ -78,7 +78,6 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
       return new THREE.MeshBasicMaterial({ map: texture });
     });
   }, [photoTextures]);
-  useEffect(() => {});
   return (
     <group {...props} dispose={null}>
       {/* bookshelf left photos */}

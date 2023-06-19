@@ -11,17 +11,25 @@
 [x] update models to load locally or via cdn
 [x] position
 
-[x] hover behavior for interactable objects needs to be implemented:
+[x] hover behavior for interactable objects needs to be implemented
+
 - [x] laptop
 - [x] bookshelf
-[~] need to add imgs to the photo frames
-[] Update camera to move to interactables
- - [] aptop
-    1. [ ] move camera to laptop screen
-    2. [ ] onClick opens project page above the scene
+      [x] need to add imgs to the photo frames
+      [x] Update camera to move to interactables
+
+- [ ] Laptop
+  1. [ ] move camera to laptop screen
+  2. [ ] onClick opens project page above the scene
 - [ ] bookshelf
-    1. [ ] move camera and lock to bookshelf
-    2. [ ] onClick returns the camera to original
-- [ ] photos
-    1. [ ] onClick camera to view photos more clearly
-[ ] embed web page
+  1. [ ] move camera and lock to bookshelf
+  2. [ ] onClick returns the camera to original
+- [ ] photos 1. [ ] onClick camera to view photos more clearly
+      [ ] embed web page
+- [ ] add Html wrapper from drei
+- [ ] configure settings to look like it's on the laptop
+- [x] import project data
+- [ ] add onClick functionality to screen/project components
+      [ ] add audio
+- [ ] fire
+- [ ] outdoors

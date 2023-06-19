@@ -9,7 +9,7 @@ interface CameraProps {
   toLaptop?: boolean;
   fromLaptop?: boolean;
 }
-export default function Camera(props: CameraProps) {
+const Camera: React.FC<CameraProps> = (props) => {
   const cameraStartPosition: [number, number, number] = [10, 25, -30];
   const ref = useRef<THREE.PerspectiveCamera>(null!);
 
@@ -21,11 +21,8 @@ export default function Camera(props: CameraProps) {
     // laptop group pos = [25.85, 3.44, 11.71]
   }
 
-  useFrame(() => {
-    const { camera, clock } = useThree();
-    console.log(camera.position);
-    console.log(clock.elapsedTime);
-  });
+  useFrame(() => {});
+
   return (
     <>
       <PerspectiveCamera
@@ -49,4 +46,6 @@ export default function Camera(props: CameraProps) {
       />
     </>
   );
-}
+};
+
+export default Camera;

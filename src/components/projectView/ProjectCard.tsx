@@ -35,7 +35,7 @@ const ProjectCard: React.FC<ProjectCardProps> = (props) => {
       <div id={props.id} className="project-card active" onClick={handleClose}>
         <div className="project-card-content">
           <img
-            src={`${process.env.REACT_APP_PHOTO_URL}/${props.photoName}`}
+            src={`${import.meta.env.VITE_PHOTO_URL}/${props.photoName}`}
             alt="who knows"
           />
           <ProjectInfo
@@ -56,7 +56,7 @@ const ProjectCard: React.FC<ProjectCardProps> = (props) => {
       <div id={props.id} className="project-card" onClick={handleOpen}>
         <div className="project-card-top">
           <img
-            src={`${process.env.REACT_APP_PHOTO_URL}/${props.photoName}`}
+            src={`${import.meta.env.VITE_PHOTO_URL}/${props.photoName}`}
             alt="who knows"
           />
         </div>
