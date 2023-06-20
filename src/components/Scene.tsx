@@ -46,6 +46,7 @@ const Scene: React.FC = () => {
     <Canvas>
       <Suspense>
         {/* passive models */}
+        <ProjectPage visible={true} />
         <Room />
         <Outside position={[40, 10, 10]} />
         <Art />
@@ -82,12 +83,12 @@ const Scene: React.FC = () => {
             {interactBlink ? (
               <Outline
                 blendFunction={BlendFunction.SCREEN}
-                edgeStrength={2.5}
+                edgeStrength={5}
                 pulseSpeed={0.5}
                 visibleEdgeColor={0xffffff}
                 hiddenEdgeColor={0x000000}
                 blur
-                kernelSize={KernelSize.SMALL}
+                kernelSize={KernelSize.VERY_LARGE}
               />
             ) : (
               <Outline
@@ -125,7 +126,6 @@ const Scene: React.FC = () => {
           />
         </Selection>
         {/* embedded HTML page on laptop */}
-        <ProjectPage visible={true} />
       </Suspense>
     </Canvas>
   );

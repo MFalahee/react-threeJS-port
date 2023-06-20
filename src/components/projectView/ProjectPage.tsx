@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Html } from "@react-three/drei";
 
 import ProjectCard from "./ProjectCard";
@@ -18,6 +18,7 @@ interface Project {
 }
 
 const ProjectPage: React.FC<ProjectPageProps> = (props) => {
+  const screenRef = useRef<HTMLElement>(null!);
   const [projects, setProjects] = useState<Project[]>([]);
   const [hidden, set] = useState(false);
   const getProjects = () => {
@@ -46,15 +47,19 @@ const ProjectPage: React.FC<ProjectPageProps> = (props) => {
   }, []);
   return (
     <Html
+      portal={screenRef}
+      position={[25.85, 3.44, 12.71]}
       occlude
       fullscreen
-      style={{
-        transition: "all 0.5s",
-        opacity: hidden ? 0 : 1,
-        transform: `scale(${hidden ? 0.9 : 1})})`,
-      }}
+      transform
       as="div"
       wrapperClass="project-page-container"
+      style={{
+        width: "100px",
+        height: "100px",
+        border: "1px solid black",
+      }}
+      rotation-y={Math.PI - 0.3}
     >
       {projects?.map((project, key) => {
         return (
