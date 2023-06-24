@@ -20,7 +20,14 @@ interface Project {
 const ProjectPage: React.FC<ProjectPageProps> = (props) => {
   const screenRef = useRef<HTMLElement>(null!);
   const [projects, setProjects] = useState<Project[]>([]);
-  const [hidden, set] = useState(false);
+  const [transformBool, setTransformBool] = useState(true); // [transformBool, setTransformBool
+  const [laptopScreenStyle, setLaptopScreenStyle] = useState({
+    width: "85px",
+    height: "52px",
+    overflow: "hidden",
+    border: "1px solid black",
+    background: "white",
+  }); // [laptopScreenStyle, setLaptopScreenStyle
   const getProjects = () => {
     fetch("projects.json", {
       headers: {
@@ -48,18 +55,15 @@ const ProjectPage: React.FC<ProjectPageProps> = (props) => {
   return (
     <Html
       portal={screenRef}
-      position={[25.85, 3.44, 12.71]}
+      position={[25.6, 3.95, 12.11]}
+      transform={transformBool}
       occlude
-      fullscreen
-      transform
       as="div"
       wrapperClass="project-page-container"
-      style={{
-        width: "100px",
-        height: "100px",
-        border: "1px solid black",
-      }}
-      rotation-y={Math.PI - 0.3}
+      style={laptopScreenStyle}
+      rotation-y={2.8}
+      rotation-x={0.04}
+      rotation-z={-0.01}
     >
       {projects?.map((project, key) => {
         return (
