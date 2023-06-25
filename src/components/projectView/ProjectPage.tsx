@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Html } from "@react-three/drei";
-
 import ProjectCard from "./ProjectCard";
 
 interface ProjectPageProps {
   visible: boolean;
+  transform: boolean;
 }
 interface Project {
   id: string;
@@ -20,14 +20,14 @@ interface Project {
 const ProjectPage: React.FC<ProjectPageProps> = (props) => {
   const screenRef = useRef<HTMLElement>(null!);
   const [projects, setProjects] = useState<Project[]>([]);
-  const [transformBool, setTransformBool] = useState(true); // [transformBool, setTransformBool
+  const [transformBool, setTransformBool] = useState(true); // toggle off when laptop is in view to prevent screen from lookin weird
   const [laptopScreenStyle, setLaptopScreenStyle] = useState({
     width: "85px",
     height: "52px",
     overflow: "hidden",
     border: "1px solid black",
     background: "white",
-  }); // [laptopScreenStyle, setLaptopScreenStyle
+  }); 
   const getProjects = () => {
     fetch("projects.json", {
       headers: {
@@ -42,7 +42,7 @@ const ProjectPage: React.FC<ProjectPageProps> = (props) => {
         setProjects(data);
       })
       .catch((err) => {
-        console.log("Error retrieving project information");
+        console.log("Error retrieving project information, try again later.");
         console.error(err);
       });
   };

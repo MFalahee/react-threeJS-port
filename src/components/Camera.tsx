@@ -1,13 +1,7 @@
-import {
-  OrbitControls,
-  PerspectiveCamera,
-  useHelper,
-  Sphere,
-} from "@react-three/drei";
+import { OrbitControls, PerspectiveCamera, Sphere } from "@react-three/drei";
 import * as THREE from "three";
-import * as TWEEN from "@tweenjs/tween.js";
 import { useFrame } from "@react-three/fiber";
-import React, { useRef, forwardRef } from "react";
+import React from "react";
 
 interface CameraProps {
   makeDefault?: boolean;
@@ -21,8 +15,7 @@ interface CameraProps {
 }
 const Camera: React.FC<CameraProps> = (props) => {
   const cameraStartPosition: THREE.Vector3 = new THREE.Vector3(13, 14, 5);
-  const [movedCamera, setMovedCamera] = React.useState(false);
-
+  const helpers = false;
   let count = 0;
   useFrame(() => {
     if (props.cameraRef && props.cameraRef.current) {
@@ -55,18 +48,24 @@ const Camera: React.FC<CameraProps> = (props) => {
         minAzimuthAngle={Math.PI / 1.3}
         maxAzimuthAngle={Math.PI + Math.PI / 2}
       />
-      <Sphere position={props.lookAtTargets.laptop} scale={0.5}>
-        <meshBasicMaterial attach="material" color="hotpink" />
-      </Sphere>
-      <Sphere position={props.lookAtTargets.bookshelf} scale={0.5}>
-        <meshBasicMaterial attach="material" color="hotpink" />
-      </Sphere>
-      <Sphere position={props.tweenPositionTargets.laptop} scale={0.1}>
-        <meshBasicMaterial attach="material" color="blue" />
-      </Sphere>
-      <Sphere position={props.tweenPositionTargets.bookshelf} scale={0.1}>
-        <meshBasicMaterial attach="material" color="blue" />
-      </Sphere>
+
+      {/* sphere helpers for camera pos/targets */}
+      {helpers ? (
+        <>
+          <Sphere position={props.lookAtTargets.laptop} scale={0.5}>
+            <meshBasicMaterial attach="material" color="hotpink" />
+          </Sphere>
+          <Sphere position={props.lookAtTargets.bookshelf} scale={0.5}>
+            <meshBasicMaterial attach="material" color="hotpink" />
+          </Sphere>
+          <Sphere position={props.tweenPositionTargets.laptop} scale={0.1}>
+            <meshBasicMaterial attach="material" color="blue" />
+          </Sphere>
+          <Sphere position={props.tweenPositionTargets.bookshelf} scale={0.1}>
+            <meshBasicMaterial attach="material" color="blue" />
+          </Sphere>{" "}
+        </>
+      ) : null}
     </>
   );
 };
