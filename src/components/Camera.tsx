@@ -1,28 +1,35 @@
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
-import React, { useRef } from "react";
+import {
+  OrbitControls,
+  PerspectiveCamera,
+  useHelper,
+  Sphere,
+} from "@react-three/drei";
+import * as THREE from "three";
+import * as TWEEN from "@tweenjs/tween.js";
+import { useFrame } from "@react-three/fiber";
+import React, { useRef, forwardRef } from "react";
 
 interface CameraProps {
   makeDefault?: boolean;
+  lookAtTargets: { laptop: THREE.Vector3; bookshelf: THREE.Vector3 };
+  tweenPositionTargets: { laptop: THREE.Vector3; bookshelf: THREE.Vector3 };
   toBookshelf?: boolean;
   fromBookshelf?: boolean;
   toLaptop?: boolean;
   fromLaptop?: boolean;
+  cameraRef: React.MutableRefObject<THREE.PerspectiveCamera>;
 }
 const Camera: React.FC<CameraProps> = (props) => {
-  const cameraStartPosition: [number, number, number] = [10, 25, -30];
-  const ref = useRef<THREE.PerspectiveCamera>(null!);
+  const cameraStartPosition: THREE.Vector3 = new THREE.Vector3(13, 14, 5);
+  const [movedCamera, setMovedCamera] = React.useState(false);
 
-  function moveCameraToBookshelf() {
-    // left bookshelf pos = [1.92, 5.43, 22.89]
-  }
-
-  function moveCameraToLaptop() {
-    // laptop group pos = [25.85, 3.44, 11.71]
-  }
-
-  useFrame(() => {});
-
+  let count = 0;
+  useFrame(() => {
+    if (props.cameraRef && props.cameraRef.current) {
+      if (count % 1000) {
+      }
+    }
+  });
   return (
     <>
       <PerspectiveCamera
@@ -30,8 +37,12 @@ const Camera: React.FC<CameraProps> = (props) => {
         near={1}
         far={500}
         fov={50}
-        ref={ref}
-        position={ref.current ? ref.current.position : cameraStartPosition}
+        ref={props.cameraRef}
+        position={
+          props.cameraRef && props.cameraRef.current
+            ? props.cameraRef.current.position
+            : cameraStartPosition
+        }
       />
       <OrbitControls
         target={[15, 10, 15]}
@@ -44,6 +55,18 @@ const Camera: React.FC<CameraProps> = (props) => {
         minAzimuthAngle={Math.PI / 1.3}
         maxAzimuthAngle={Math.PI + Math.PI / 2}
       />
+      <Sphere position={props.lookAtTargets.laptop} scale={0.5}>
+        <meshBasicMaterial attach="material" color="hotpink" />
+      </Sphere>
+      <Sphere position={props.lookAtTargets.bookshelf} scale={0.5}>
+        <meshBasicMaterial attach="material" color="hotpink" />
+      </Sphere>
+      <Sphere position={props.tweenPositionTargets.laptop} scale={0.1}>
+        <meshBasicMaterial attach="material" color="blue" />
+      </Sphere>
+      <Sphere position={props.tweenPositionTargets.bookshelf} scale={0.1}>
+        <meshBasicMaterial attach="material" color="blue" />
+      </Sphere>
     </>
   );
 };
