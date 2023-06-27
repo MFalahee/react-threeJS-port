@@ -20,14 +20,13 @@ interface Project {
 const ProjectPage: React.FC<ProjectPageProps> = (props) => {
   const screenRef = useRef<HTMLElement>(null!);
   const [projects, setProjects] = useState<Project[]>([]);
-  const [transformBool, setTransformBool] = useState(true); // toggle off when laptop is in view to prevent screen from lookin weird
   const [laptopScreenStyle, setLaptopScreenStyle] = useState({
     width: "85px",
     height: "52px",
     overflow: "hidden",
     border: "1px solid black",
     background: "white",
-  }); 
+  });
   const getProjects = () => {
     fetch("projects.json", {
       headers: {
@@ -52,36 +51,68 @@ const ProjectPage: React.FC<ProjectPageProps> = (props) => {
       getProjects();
     }
   }, []);
-  return (
-    <Html
-      portal={screenRef}
-      position={[25.6, 3.95, 12.11]}
-      transform={transformBool}
-      occlude
-      as="div"
-      wrapperClass="project-page-container"
-      style={laptopScreenStyle}
-      rotation-y={2.8}
-      rotation-x={0.04}
-      rotation-z={-0.01}
-    >
-      {projects?.map((project, key) => {
-        return (
-          <ProjectCard
-            key={key}
-            id={project.id}
-            title={project.title}
-            description={project.shortDescription}
-            photoName={project.imageURL}
-            githubLink={project.githubURL}
-            skills={[]}
-            visible={props.visible}
-            list={[]}
-          />
-        );
-      })}
-    </Html>
-  );
+
+  if (!props.transform) {
+    return (
+      <Html
+        portal={screenRef}
+        position={[25.6, 3.95, 12.11]}
+        as="div"
+        wrapperClass="project-page-container no-transform"
+        style={laptopScreenStyle}
+        rotation-y={2.8}
+        rotation-x={0.04}
+        rotation-z={-0.01}
+      >
+        {projects?.map((project, key) => {
+          return (
+            <ProjectCard
+              key={key}
+              id={project.id}
+              title={project.title}
+              description={project.shortDescription}
+              photoName={project.imageURL}
+              githubLink={project.githubURL}
+              skills={[]}
+              visible={props.visible}
+              list={[]}
+            />
+          );
+        })}
+      </Html>
+    );
+  } else {
+    return (
+      <Html
+        portal={screenRef}
+        position={[25.6, 3.95, 12.11]}
+        transform
+        occlude
+        as="div"
+        wrapperClass="project-page-container"
+        style={laptopScreenStyle}
+        rotation-y={2.8}
+        rotation-x={0.04}
+        rotation-z={-0.01}
+      >
+        {projects?.map((project, key) => {
+          return (
+            <ProjectCard
+              key={key}
+              id={project.id}
+              title={project.title}
+              description={project.shortDescription}
+              photoName={project.imageURL}
+              githubLink={project.githubURL}
+              skills={[]}
+              visible={props.visible}
+              list={[]}
+            />
+          );
+        })}
+      </Html>
+    );
+  }
 };
 
 export default ProjectPage;

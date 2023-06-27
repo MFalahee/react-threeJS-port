@@ -18,7 +18,10 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = (props) => {
   const [cardOpen, setCardOpen] = useState(false);
-
+  let photoURL = `/imgs/${props.photoName}`;
+  import.meta.env.PROD
+    ? (photoURL = `${import.meta.env.VITE_PHOTO_URL}${props.photoName}`)
+    : null;
   const handleOpen = () => {
     if (!cardOpen) {
       setCardOpen(true);
@@ -34,10 +37,7 @@ const ProjectCard: React.FC<ProjectCardProps> = (props) => {
     return (
       <div id={props.id} className="project-card active" onClick={handleClose}>
         <div className="project-card-content">
-          <img
-            src={`${import.meta.env.VITE_PHOTO_URL}${props.photoName}`}
-            alt="who knows"
-          />
+          <img src={photoURL} alt="image failed to load" />
           <ProjectInfo
             visible={cardOpen}
             title={props.title}
@@ -55,10 +55,7 @@ const ProjectCard: React.FC<ProjectCardProps> = (props) => {
     return (
       <div id={props.id} className="project-card" onClick={handleOpen}>
         <div className="project-card-top">
-          <img
-            src={`${import.meta.env.VITE_PHOTO_URL}${props.photoName}`}
-            alt="who knows"
-          />
+          <img src={photoURL} alt="image failed to load" />
         </div>
       </div>
     );

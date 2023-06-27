@@ -1,7 +1,7 @@
-import React, { useRef, Suspense } from "react";
+import React, { useEffect, useRef, Suspense, useCallback } from "react";
 import * as THREE from "three";
 import * as TWEEN from "@tweenjs/tween.js";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, RenderCallback, useFrame } from "@react-three/fiber";
 import { useCursor } from "@react-three/drei";
 import { Selection } from "@react-three/postprocessing";
 import Camera from "./Camera";
@@ -14,41 +14,71 @@ import { default as ProjectPage } from "./projectView/ProjectPage";
 const Scene: React.FC = () => {
   const [interactBlink, setInteractBlink] = React.useState(true);
   const [transformScreen, setTransformScreen] = React.useState(true);
+  const [prevCamPosition, setPrevCamPosition] = React.useState(
+    new THREE.Vector3(13, 14, 5)
+  );
   const cameraRef = React.useRef<THREE.PerspectiveCamera>(null!);
   const [moveCameraToBookshelf, setMoveCameraToBookshelf] =
     React.useState(false);
   const [moveCameraToLaptop, setMoveCameraToLaptop] = React.useState(false);
   useCursor(!interactBlink, "pointer", "auto");
 
-  // for tween purposes
-  const cameraLookAtTargets = {
-    bookshelf: new THREE.Vector3(1.5, 8.43, 13.89),
-    laptop: new THREE.Vector3(25.55, 4.0, 11.91),
-  };
+  // for tween camera pan purposes
   const cameraTweenPositionTargets = {
-    bookshelf: new THREE.Vector3(13.92, 10.43, 15.89),
-    laptop: new THREE.Vector3(26.5, 4.2, 10),
+    bookshelf: new THREE.Vector3(14.92, 12.43, 18.89),
+    laptop: new THREE.Vector3(26.2, 4.2, 10.4),
   };
+
+  // click handlers for camera pan
   function handleLaptopClick() {
-    console.log("laptop clicked");
-    console.log(cameraRef.current);
     if (moveCameraToLaptop === true) {
       setMoveCameraToLaptop(false);
       setTransformScreen(true);
     } else {
+      setPrevCamPosition(cameraRef.current.position);
       setMoveCameraToLaptop(true);
-      setTransformScreen(false);
     }
   }
 
   function handlePhotoClick() {
-    console.log(cameraRef.current);
     if (moveCameraToBookshelf === true) {
       setMoveCameraToBookshelf(false);
     } else {
       setMoveCameraToBookshelf(true);
     }
   }
+  const moveBookshelf = useCallback(() => {
+    let tween = new TWEEN.Tween(cameraRef.current.position)
+      .to(cameraTweenPositionTargets.bookshelf, 2000)
+      .easing(TWEEN.Easing.Quadratic.InOut)
+      .onComplete(() => {
+        // at bookshelf
+        // add disable for photo frames and instead enlarge photos or zoom up to them -- TODO
+      });
+    return tween.start();
+  }, [cameraRef]);
+
+  const moveLaptop = useCallback(() => {
+    let tween = new TWEEN.Tween(cameraRef.current.position)
+      .to(cameraTweenPositionTargets.laptop, 2000)
+      .easing(TWEEN.Easing.Quadratic.InOut)
+      .onComplete(() => {
+        // at laptop
+        // disable screen transform
+        setTransformScreen(false);
+      });
+    return tween.start();
+  }, [cameraRef]);
+
+  useEffect(() => {
+    if (moveCameraToBookshelf) {
+      moveBookshelf();
+    }
+    if (moveCameraToLaptop) {
+      moveLaptop();
+    }
+  }, [moveCameraToBookshelf, moveCameraToLaptop]);
+
   return (
     <Canvas>
       <Suspense>
@@ -59,10 +89,12 @@ const Scene: React.FC = () => {
         {/* camera */}
         <Camera
           cameraRef={cameraRef}
+          prevCamPosition={prevCamPosition}
           toBookshelf={moveCameraToBookshelf}
           toLaptop={moveCameraToLaptop}
-          lookAtTargets={cameraLookAtTargets}
           tweenPositionTargets={cameraTweenPositionTargets}
+          lookAtBookshelf={moveCameraToBookshelf}
+          lookAtLaptop={moveCameraToLaptop}
         />
         {/* selection for outline effect on laptop/bookshelf */}
         <Selection>

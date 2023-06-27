@@ -18,18 +18,19 @@
       [x] need to add imgs to the photo frames
       [x] Update camera to move to interactables
 
-- [ ] Laptop
-  1. [ ] move camera to laptop screen
-  2. [ ] onClick opens project page above the scene
-- [ ] bookshelf
-  1. [ ] move camera and lock to bookshelf
-  2. [ ] onClick returns the camera to original
-- [ ] photos 1. [ ] onClick camera to view photos more clearly
-      [ ] embed web page
-- [ ] add Html wrapper from drei
-- [ ] configure settings to look like it's on the laptop
+- [x] Laptop
+  1. [x] move camera to laptop screen
+  2. [x] onClick opens project page above the scene
+- [x] bookshelf
+  1. [x] move camera and lock to bookshelf
+  2. [x] onClick returns the camera to original
+- [x] photos 1. [ ] onClick camera to view photos more clearly
+- [x] embed web page
+- [x] add Html wrapper from drei
+- [ r] configure settings to look like it's on the laptop
 - [x] import project data
 - [ ] add onClick functionality to screen/project components
       [ ] add audio
 - [ ] fire
 - [ ] outdoors
+- [ ] onComplete -> add disable for photo frames and instead enlarge photos or zoom up to them -- TODO
