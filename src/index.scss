@@ -7,17 +7,9 @@ body,
   padding: 0;
   user-select: none;
   overflow: hidden;
-  display: flex;
   scrollbar-width: none;
   scroll-behavior: none;
   box-sizing: border-box;
-}
-
-body {
-  position: fixed;
-  overflow: hidden;
-  overscroll-behavior-y: none;
-  background: #000;
 }
 
 #loading-screen {
@@ -75,31 +67,6 @@ body {
   border-top-color: #ff00ff;
   -webkit-animation: spin 1.5s linear infinite;
   animation: spin 1.5s linear infinite;
-}
-
-@-webkit-keyframes spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@keyframes spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
 }
 
 @import "./styles/index.scss";

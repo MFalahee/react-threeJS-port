@@ -1,27 +1,34 @@
-import React, { useEffect, useRef, Suspense, useCallback } from "react";
+import React, { useEffect, Suspense, useCallback } from "react";
 import * as THREE from "three";
 import * as TWEEN from "@tweenjs/tween.js";
-import { Canvas, RenderCallback, useFrame } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import { useCursor } from "@react-three/drei";
 import { Selection } from "@react-three/postprocessing";
 import Camera from "./Camera";
 import StaticModels from "./models/StaticModels";
+import { Model as LaptopScreen } from "./models/LaptopScreen";
 import { Model as Laptop } from "./models/Laptop";
 import { Model as Photos } from "./models/Photos";
 import { default as Effects } from "./Effects";
-import { default as ProjectPage } from "./projectView/ProjectPage";
 
 const Scene: React.FC = () => {
   const [interactBlink, setInteractBlink] = React.useState(true);
+
+  // laptop screen states
   const [transformScreen, setTransformScreen] = React.useState(true);
+
+  // camera states
   const [prevCamPosition, setPrevCamPosition] = React.useState(
     new THREE.Vector3(13, 14, 5)
   );
-  const cameraRef = React.useRef<THREE.PerspectiveCamera>(null!);
   const [moveCameraToBookshelf, setMoveCameraToBookshelf] =
     React.useState(false);
   const [moveCameraToLaptop, setMoveCameraToLaptop] = React.useState(false);
   useCursor(!interactBlink, "pointer", "auto");
+
+  // refs to pass to models
+  const laptopScreenMeshRef = React.useRef(null!);
+  const cameraRef = React.useRef<THREE.PerspectiveCamera>(null!);
 
   // for tween camera pan purposes
   const cameraTweenPositionTargets = {
@@ -40,6 +47,7 @@ const Scene: React.FC = () => {
     }
   }
 
+  // click handlers for camera pan
   function handlePhotoClick() {
     if (moveCameraToBookshelf === true) {
       setMoveCameraToBookshelf(false);
@@ -58,6 +66,7 @@ const Scene: React.FC = () => {
     return tween.start();
   }, [cameraRef]);
 
+  // for tween camera pan purposes
   const moveLaptop = useCallback(() => {
     let tween = new TWEEN.Tween(cameraRef.current.position)
       .to(cameraTweenPositionTargets.laptop, 2000)
@@ -70,6 +79,7 @@ const Scene: React.FC = () => {
     return tween.start();
   }, [cameraRef]);
 
+  // for camera panning effect on click
   useEffect(() => {
     if (moveCameraToBookshelf) {
       moveBookshelf();
@@ -85,7 +95,11 @@ const Scene: React.FC = () => {
         {/* static models */}
         <StaticModels />
         {/* interactable models*/}
-        <ProjectPage visible={true} transform={transformScreen} />
+        <LaptopScreen
+          laptopScreenMeshRef={laptopScreenMeshRef}
+          transformBool={transformScreen}
+        />
+
         {/* camera */}
         <Camera
           cameraRef={cameraRef}

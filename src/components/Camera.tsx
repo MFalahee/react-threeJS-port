@@ -18,20 +18,13 @@ interface CameraProps {
   cameraRef: React.MutableRefObject<THREE.PerspectiveCamera>;
 }
 const Camera: React.FC<CameraProps> = (props) => {
-  const helpers = true;
-  let count = 0;
+  const helpers = false;
   const cameraLookAtTargets = {
     bookshelf: new THREE.Vector3(1.5, 9.43, 18.5),
-    laptop: new THREE.Vector3(25.7, 4.0, 11.91),
+    laptop: new THREE.Vector3(25.7, 4.0, 11.9),
   };
 
   useFrame((state, delta) => {
-    count++;
-    if (props.cameraRef && props.cameraRef.current) {
-      if (count % 100000) {
-      }
-    }
-
     TWEEN.update();
     if (props.lookAtLaptop && props.cameraRef.current && !TWEEN.isPlaying)
       props.cameraRef.current.lookAt(cameraLookAtTargets.laptop);
@@ -39,10 +32,7 @@ const Camera: React.FC<CameraProps> = (props) => {
       props.cameraRef.current.lookAt(cameraLookAtTargets.bookshelf);
   });
 
-  useEffect(() => {
-    // initial setup of camera
-    console.log("camera", props.cameraRef.current);
-  });
+  useEffect(() => {});
   if (props.toBookshelf || props.toLaptop) {
     return (
       <PerspectiveCamera

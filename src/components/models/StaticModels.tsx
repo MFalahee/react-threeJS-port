@@ -1,5 +1,5 @@
 import React from "react";
-import { Stars } from "@react-three/drei";
+import { Stars, Sky } from "@react-three/drei";
 import Lights from "../Lights";
 import { Model as Art } from "./Art";
 import { Model as Books } from "./Books";
@@ -26,6 +26,16 @@ const StaticModels: React.FC = () => {
       <Bookshelf position={[0, 0, -8.5]} />
       <BookshelfItems position={[0, 0, -0.3]} />
       <Snow />
+      <Sky
+        turbidity={0.1}
+        rayleigh={0.0063}
+        mieCoefficient={0.00012}
+        mieDirectionalG={1}
+        azimuth={0.25}
+        inclination={5}
+        distance={450000}
+        sunPosition={[0, 100, 25]}
+      />
       <Fire />
       <Room />
       <Lights />
