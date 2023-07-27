@@ -55,7 +55,7 @@ const Camera: React.FC<CameraProps> = (props) => {
           makeDefault
           near={1}
           far={500}
-          fov={50}
+          fov={60}
           ref={props.cameraRef ? props.cameraRef : null}
           position={
             props.cameraRef && props.cameraRef.current
@@ -64,7 +64,7 @@ const Camera: React.FC<CameraProps> = (props) => {
           }
         />
         <OrbitControls
-          target={[15, 10, 15]}
+          target={[40, 11, 10]}
           enableZoom={true}
           enablePan={true}
           maxDistance={15}

@@ -14,6 +14,7 @@ import { Model as Skis } from "./Skis";
 import { Model as Bookshelf } from "./Bookshelf";
 import { Model as BookshelfItems } from "./BookshelfItems";
 import { Model as Outside } from "./Outside";
+import { default as Text } from "./Text";
 import { default as Snow } from "./Snow";
 import { default as Fire } from "./Fire";
 
@@ -36,6 +37,7 @@ const StaticModels: React.FC = () => {
         distance={450000}
         sunPosition={[0, 100, 25]}
       />
+      <Text />
       <Fire />
       <Room />
       <Lights />
