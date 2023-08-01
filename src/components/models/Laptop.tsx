@@ -31,6 +31,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   return (
     <group {...props} dispose={null}>
       <group position={[25.85, 3.44, 11.71]}>
+        {/* base */}
         <mesh
           castShadow
           receiveShadow

@@ -1,8 +1,13 @@
-import React, { useEffect } from "react";
-
-import { OrbitControls, PerspectiveCamera, Sphere } from "@react-three/drei";
+import React from "react";
+import {
+  OrbitControls,
+  PerspectiveCamera,
+  Sphere,
+  useKeyboardControls,
+} from "@react-three/drei";
 import * as THREE from "three";
-import TWEEN from "@tweenjs/tween.js";
+// @ts-ignore
+import * as TWEEN from "@tweenjs/tween.js";
 import { useFrame } from "@react-three/fiber";
 
 interface CameraProps {
@@ -17,14 +22,47 @@ interface CameraProps {
   lookAtBookshelf?: boolean;
   cameraRef: React.MutableRefObject<THREE.PerspectiveCamera>;
 }
+
 const Camera: React.FC<CameraProps> = (props) => {
-  const helpers = false;
+  const cameraHelpers = false;
   const cameraLookAtTargets = {
     bookshelf: new THREE.Vector3(1.5, 9.43, 18.5),
     laptop: new THREE.Vector3(25.7, 4.0, 11.9),
   };
 
-  useFrame((state, delta) => {
+  const sideVector = new THREE.Vector3();
+  const [, get] = useKeyboardControls();
+
+  useFrame(() => {
+    if (!TWEEN.isPlaying && props.cameraRef.current) {
+      const { forward, back, left, right, up, down } = get();
+      // camera movement outside of tween
+      if (forward) {
+        props.cameraRef.current.position.x += 0.1;
+      }
+      if (back) {
+        props.cameraRef.current.position.x -= 0.1;
+      }
+      if (left) {
+        props.cameraRef.current.getWorldDirection(sideVector);
+        sideVector.cross(props.cameraRef.current.up);
+        sideVector.multiplyScalar(0.1);
+        props.cameraRef.current.position.add(sideVector);
+      }
+      if (right) {
+        props.cameraRef.current.getWorldDirection(sideVector);
+        sideVector.cross(props.cameraRef.current.up);
+        sideVector.multiplyScalar(0.1);
+        props.cameraRef.current.position.sub(sideVector);
+      }
+      if (up) {
+        props.cameraRef.current.position;
+      }
+      if (down) {
+        props.cameraRef.current.position.y -= 0.1;
+      }
+    }
+    // tween camera movement for laptop/bookshelf
     TWEEN.update();
     if (props.lookAtLaptop && props.cameraRef.current && !TWEEN.isPlaying)
       props.cameraRef.current.lookAt(cameraLookAtTargets.laptop);
@@ -32,7 +70,6 @@ const Camera: React.FC<CameraProps> = (props) => {
       props.cameraRef.current.lookAt(cameraLookAtTargets.bookshelf);
   });
 
-  useEffect(() => {});
   if (props.toBookshelf || props.toLaptop) {
     return (
       <PerspectiveCamera
@@ -76,7 +113,7 @@ const Camera: React.FC<CameraProps> = (props) => {
         />
 
         {/* sphere helpers for camera pos/targets */}
-        {helpers ? (
+        {cameraHelpers ? (
           <>
             <Sphere position={cameraLookAtTargets.laptop} scale={0.1}>
               <meshBasicMaterial attach="material" color="hotpink" />

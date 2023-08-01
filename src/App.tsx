@@ -1,18 +1,40 @@
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
-
-import { Stats, Loader } from "@react-three/drei";
+import * as React from "react";
+import {
+  Stats,
+  Loader,
+  KeyboardControls,
+  KeyboardControlsEntry,
+} from "@react-three/drei";
 import { Leva } from "leva";
 import Scene from "./components/Scene";
 import "./index.scss";
 
+enum Controls {
+  forward = "forward",
+  back = "back",
+  left = "left",
+  right = "right",
+  up = "up",
+  down = "down",
+}
 function App() {
-
-  
-
+  const keyMap = React.useMemo<KeyboardControlsEntry<Controls>[]>(() => {
+    return [
+      { name: Controls.forward, keys: ["ArrowUp", "KeyW"] },
+      { name: Controls.back, keys: ["ArrowDown", "KeyS"] },
+      { name: Controls.left, keys: ["ArrowLeft", "KeyA"] },
+      { name: Controls.right, keys: ["ArrowRight", "KeyD"] },
+      { name: Controls.up, keys: ["KeyX"] },
+      { name: Controls.down, keys: ["KeyZ"] },
+    ];
+  }, []);
   return (
     <>
-      <Scene />
+      <KeyboardControls map={keyMap}>
+        <Scene />
+      </KeyboardControls>
       <Loader
         containerStyles={{ backgroundColor: "black" }}
         innerStyles={{
