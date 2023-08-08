@@ -9,10 +9,6 @@ import { awsModelPath } from "../../utils/awsModelPath";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
-const screenPositions = {
-  transformed: new THREE.Vector3(0, 0, 0),
-  untransformed: new THREE.Vector3(0, 0, 0),
-};
 type GLTFResult = GLTF & {
   nodes: {
     Laptop_Cube009: THREE.Mesh;
@@ -29,7 +25,7 @@ type GLTFResult = GLTF & {
 };
 let modelPath: string = "/models/laptop.gltf";
 
-interface modelProps extends THREE.Group {
+interface modelProps {
   transformBool: boolean;
   onClick: () => void;
   onPointerOver: () => void;
