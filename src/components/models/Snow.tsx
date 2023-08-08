@@ -1,10 +1,10 @@
-import React, { useMemo, useRef } from 'react';
-import * as THREE from 'three';
-import { useFrame } from '@react-three/fiber';
-import { InstancedMesh, Vector3 } from 'three';
+import React, { useMemo, useRef } from "react";
+import * as THREE from "three";
+import { useFrame } from "@react-three/fiber";
+import { InstancedMesh, Vector3 } from "three";
 
 const NUM_PARTICLES = 1000;
-const BOUNDARY_X = 100;
+const BOUNDARY_X = 70;
 const BOUNDARY_Y = 100;
 const BOUNDARY_Z = 100;
 
@@ -17,13 +17,13 @@ export default function Snow() {
       const position = new Vector3(
         (Math.random() - 0.5) * BOUNDARY_X,
         (Math.random() - 0.5) * BOUNDARY_Y,
-        (Math.random() - 0.5) * BOUNDARY_Z,
+        (Math.random() - 0.5) * BOUNDARY_Z
       );
 
       const velocity = new Vector3(
-        (Math.random() - 0.5) / 50,  // Simulate wind
-        -Math.random() / 10,         // Gravity
-        (Math.random() - 0.5) / 50,  // Simulate wind
+        -Math.random() / 10, // Simulate wind
+        -Math.random() / 10, // Gravity
+        (Math.random() - 0.5) / 50 // Simulate wind
       );
 
       temp.push({ position, velocity });
@@ -33,7 +33,6 @@ export default function Snow() {
 
   useFrame(() => {
     if (meshRef.current) {
-      const time = performance.now();
       particles.forEach((particle, i) => {
         particle.position.add(particle.velocity);
 
@@ -45,7 +44,7 @@ export default function Snow() {
           particle.position.set(
             (Math.random() - 0.5) * BOUNDARY_X,
             (Math.random() - 0.5) * BOUNDARY_Y,
-            (Math.random() - 0.5) * BOUNDARY_Z,
+            (Math.random() - 0.5) * BOUNDARY_Z
           );
         }
 
@@ -59,15 +58,20 @@ export default function Snow() {
   });
 
   return (
-<>     
-<instancedMesh ref={meshRef}
- 
-position={[100, 50, 10]}
-rotation-y={-Math.PI / 2}
-args={[new THREE.BufferGeometry, new THREE.MeshStandardMaterial, NUM_PARTICLES]}>
-        <circleGeometry args={[0.1, 16]} />
-        <meshBasicMaterial color="white" />
+    <>
+      <instancedMesh
+        ref={meshRef}
+        position={[100, 50, 10]}
+        rotation-y={-Math.PI / 2}
+        args={[
+          new THREE.BufferGeometry(),
+          new THREE.MeshStandardMaterial(),
+          NUM_PARTICLES,
+        ]}
+      >
+        <circleGeometry args={[0.07, 16]} />
+        <meshBasicMaterial color={0x606f99} />
       </instancedMesh>
     </>
   );
-};
+}

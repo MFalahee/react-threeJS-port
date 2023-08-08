@@ -66,8 +66,8 @@ const Fire: React.FC = () => {
 
   const intenseParticleMaterial = new THREE.ShaderMaterial({
     uniforms: {
-      color1: { value: new THREE.Color(0xe89005) },
-      color2: { value: new THREE.Color(0xe70e02) },
+      color2: { value: new THREE.Color(0xe89005) },
+      color1: { value: new THREE.Color(0xd84a05) },
     },
     vertexShader: `
       precision highp float;
@@ -81,8 +81,7 @@ const Fire: React.FC = () => {
       }
     `,
     fragmentShader: `
-    precision highp float;
-
+      precision highp float;
       varying vec3 vColor;
       void main() {
         gl_FragColor = vec4(vColor, 1.0);
@@ -146,8 +145,8 @@ const Fire: React.FC = () => {
     updateParticles(
       intensePositions,
       intenseParticleVelocities,
-      1.0,
-      1.7,
+      0.8,
+      3,
       1.0,
       intenseParticles.current.geometry
     );

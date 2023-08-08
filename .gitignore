@@ -24,7 +24,18 @@ dist-ssr
 *.sw?
 # local model files
 public/*.gltf
+public/imgs
 *.gltf
 *.glb
 public/big/
 public/models/
+.env
+
+src/utils/*.md
+
+
+
+build/
+dist/
+node_modules/
+
