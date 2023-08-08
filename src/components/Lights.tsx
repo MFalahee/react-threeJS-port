@@ -2,8 +2,6 @@ import React, { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 
 const Lights: React.FC = () => {
-  let debugColor = "#5EFF00";
-  let blue1 = "#3B5EC4";
   let blue2 = "#627ED0";
   const ref = useRef(null!);
   const fireLightRef1 = React.useRef<THREE.PointLight>(null!);

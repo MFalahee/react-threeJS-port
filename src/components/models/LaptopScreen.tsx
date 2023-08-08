@@ -1,4 +1,3 @@
-import * as React from "react";
 import * as THREE from "three";
 import { Html } from "@react-three/drei";
 

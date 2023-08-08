@@ -1,5 +1,6 @@
 import React, { useEffect, Suspense, useCallback } from "react";
 import * as THREE from "three";
+// @ts-ignore
 import * as TWEEN from "@tweenjs/tween.js";
 import { Canvas } from "@react-three/fiber";
 import { useCursor } from "@react-three/drei";
@@ -94,9 +95,7 @@ const Scene: React.FC = () => {
         {/* static models */}
         <StaticModels />
         {/* interactable models*/}
-        <LaptopScreen
-          transformBool={transformScreen}
-        />
+        <LaptopScreen transformBool={transformScreen} />
 
         {/* camera */}
         <Camera
@@ -112,6 +111,7 @@ const Scene: React.FC = () => {
         <Selection>
           <Effects interactBlink={interactBlink} />
           <Laptop
+            transformBool={transformScreen}
             onClick={() => {
               handleLaptopClick();
             }}
