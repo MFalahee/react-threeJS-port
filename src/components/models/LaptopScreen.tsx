@@ -3,7 +3,6 @@ import * as THREE from "three";
 import { Html } from "@react-three/drei";
 
 interface LaptopScreenProps {
-  laptopScreenMeshRef: React.MutableRefObject<THREE.Group>;
   transformBool: boolean;
 }
 
@@ -13,7 +12,6 @@ export function Model(props: LaptopScreenProps) {
     untransformed: new THREE.Vector3(1.01, 0.62, -0.1),
   };
   return (
-    <group ref={props.laptopScreenMeshRef} {...props} dispose={null}>
       <mesh position={[25.6, 3.96, 12.11]} rotation={[0.05, -0.325, 0.02]}>
         {props.transformBool ? (
           <Html
@@ -47,6 +45,5 @@ export function Model(props: LaptopScreenProps) {
           </Html>
         )}
       </mesh>
-    </group>
   );
 }

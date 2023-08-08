@@ -15,6 +15,7 @@ const Scene: React.FC = () => {
   const [interactBlink, setInteractBlink] = React.useState(true);
 
   // laptop screen states
+  const [transformScreen, setTransformScreen] = React.useState(true);
 
   // camera states
   const [prevCamPosition, setPrevCamPosition] = React.useState(
@@ -38,6 +39,7 @@ const Scene: React.FC = () => {
   function handleLaptopClick() {
     if (moveCameraToLaptop === true) {
       setMoveCameraToLaptop(false);
+      setTransformScreen(true);
     } else {
       setPrevCamPosition(cameraRef.current.position);
       setMoveCameraToLaptop(true);
@@ -71,6 +73,7 @@ const Scene: React.FC = () => {
       .onComplete(() => {
         // at laptop
         // disable screen transform
+        setTransformScreen(false);
       });
     return tween.start();
   }, [cameraRef]);
@@ -91,10 +94,9 @@ const Scene: React.FC = () => {
         {/* static models */}
         <StaticModels />
         {/* interactable models*/}
-        {/* <LaptopScreen
-          laptopScreenMeshRef={laptopScreenMeshRef}
+        <LaptopScreen
           transformBool={transformScreen}
-        /> */}
+        />
 
         {/* camera */}
         <Camera

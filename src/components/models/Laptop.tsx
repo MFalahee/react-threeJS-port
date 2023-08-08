@@ -9,6 +9,10 @@ import { awsModelPath } from "../../utils/awsModelPath";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
+const screenPositions = {
+  transformed: new THREE.Vector3(0, 0, 0),
+  untransformed: new THREE.Vector3(0, 0, 0),
+};
 type GLTFResult = GLTF & {
   nodes: {
     Laptop_Cube009: THREE.Mesh;
@@ -24,14 +28,20 @@ type GLTFResult = GLTF & {
   };
 };
 let modelPath: string = "/models/laptop.gltf";
+
+interface modelProps extends THREE.Group {
+  transformBool: boolean;
+  onClick: () => void;
+  onPointerOver: () => void;
+  onPointerLeave: () => void;
+}
 import.meta.env.PROD ? (modelPath = awsModelPath(modelPath)) : null;
-export function Model(props: JSX.IntrinsicElements["group"]) {
+export function Model(props: modelProps) {
   const ref = useRef<THREE.Mesh>(null!);
   const { nodes, materials } = useGLTF(modelPath) as GLTFResult;
   return (
     <group {...props} dispose={null}>
       <group position={[25.85, 3.44, 11.71]}>
-        {/* base */}
         <mesh
           castShadow
           receiveShadow
