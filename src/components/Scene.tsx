@@ -122,7 +122,7 @@ const Scene: React.FC = () => {
               setInteractBlink(true);
             }}
           />
-          <Photos
+          {/* <Photos
             onClick={() => {
               handlePhotoClick();
             }}
@@ -132,7 +132,7 @@ const Scene: React.FC = () => {
             onPointerLeave={() => {
               setInteractBlink(true);
             }}
-          />
+          /> */}
         </Selection>
         {/* embedded HTML page on laptop */}
       </Suspense>

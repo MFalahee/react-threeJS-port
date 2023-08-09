@@ -59,12 +59,14 @@ type GLTFResult = GLTF & {
 
 let modelPath: string = "/models/photos.gltf";
 import.meta.env.PROD ? (modelPath = awsModelPath(modelPath)) : null;
-
+const photoSources = await photoHandler().then((res) => {
+  console.log("Photos loaded");
+  return res;
+});
 export function Model(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF(modelPath) as GLTFResult;
 
   // create the photos
-  const photoSources = photoHandler();
   const photoTextures = useTexture(photoSources) as THREE.Texture[];
   const photoMaterials = useMemo(() => {
     if (!photoTextures || photoTextures.length === 0) {

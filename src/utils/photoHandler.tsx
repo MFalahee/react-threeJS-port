@@ -1,5 +1,5 @@
 // create a function that returns the path to the model, given the model name
-export function photoHandler() {
+export async function photoHandler() {
   const imgNames = [
     "backyard.webp",
     "brosndad.webp",
