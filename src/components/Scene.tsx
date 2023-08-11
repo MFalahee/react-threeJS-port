@@ -48,13 +48,13 @@ const Scene: React.FC = () => {
   }
 
   // click handlers for camera pan
-  function handlePhotoClick() {
-    if (moveCameraToBookshelf === true) {
-      setMoveCameraToBookshelf(false);
-    } else {
-      setMoveCameraToBookshelf(true);
-    }
-  }
+  // function handlePhotoClick() {
+  //   if (moveCameraToBookshelf === true) {
+  //     setMoveCameraToBookshelf(false);
+  //   } else {
+  //     setMoveCameraToBookshelf(true);
+  //   }
+  // }
   const moveBookshelf = useCallback(() => {
     let tween = new TWEEN.Tween(cameraRef.current.position)
       .to(cameraTweenPositionTargets.bookshelf, 2000)
