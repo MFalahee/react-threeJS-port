@@ -214,4 +214,4 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload(modelPath);
+// useGLTF.preload(modelPath);
