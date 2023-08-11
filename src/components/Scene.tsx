@@ -22,8 +22,8 @@ const Scene: React.FC = () => {
   const [prevCamPosition, setPrevCamPosition] = React.useState(
     new THREE.Vector3(13, 14, 5)
   );
-  const [moveCameraToBookshelf, setMoveCameraToBookshelf] =
-    React.useState(false);
+  // const [moveCameraToBookshelf, setMoveCameraToBookshelf] =
+  //   React.useState(false);
   const [moveCameraToLaptop, setMoveCameraToLaptop] = React.useState(false);
   useCursor(!interactBlink, "pointer", "auto");
 
@@ -55,7 +55,7 @@ const Scene: React.FC = () => {
   //     setMoveCameraToBookshelf(true);
   //   }
   // }
-  const moveBookshelf = useCallback(() => {
+  /*const moveBookshelf = useCallback(() => {
     let tween = new TWEEN.Tween(cameraRef.current.position)
       .to(cameraTweenPositionTargets.bookshelf, 2000)
       .easing(TWEEN.Easing.Quadratic.InOut)
@@ -64,7 +64,7 @@ const Scene: React.FC = () => {
         // add disable for photo frames and instead enlarge photos or zoom up to them -- TODO
       });
     return tween.start();
-  }, [cameraRef]);
+  }, [cameraRef]);*/
 
   // for tween camera pan purposes
   const moveLaptop = useCallback(() => {
@@ -81,13 +81,13 @@ const Scene: React.FC = () => {
 
   // for camera panning effect on click
   useEffect(() => {
-    if (moveCameraToBookshelf) {
-      moveBookshelf();
-    }
+    // if (moveCameraToBookshelf) {
+    //   moveBookshelf();
+    // }
     if (moveCameraToLaptop) {
       moveLaptop();
     }
-  }, [moveCameraToBookshelf, moveCameraToLaptop]);
+  }, [/*moveCameraToBookshelf,*/ moveCameraToLaptop]);
 
   return (
     <Canvas>
@@ -101,10 +101,10 @@ const Scene: React.FC = () => {
         <Camera
           cameraRef={cameraRef}
           prevCamPosition={prevCamPosition}
-          toBookshelf={moveCameraToBookshelf}
+          // toBookshelf={moveCameraToBookshelf}
           toLaptop={moveCameraToLaptop}
           tweenPositionTargets={cameraTweenPositionTargets}
-          lookAtBookshelf={moveCameraToBookshelf}
+          // lookAtBookshelf={moveCameraToBookshelf}
           lookAtLaptop={moveCameraToLaptop}
         />
         {/* selection for outline effect on laptop/bookshelf */}
