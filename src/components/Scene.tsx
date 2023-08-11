@@ -9,7 +9,7 @@ import Camera from "./Camera";
 import StaticModels from "./models/StaticModels";
 import { Model as LaptopScreen } from "./models/LaptopScreen";
 import { Model as Laptop } from "./models/Laptop";
-import { Model as Photos } from "./models/Photos";
+// import { Model as Photos } from "./models/Photos";
 import { default as Effects } from "./Effects";
 
 const Scene: React.FC = () => {
